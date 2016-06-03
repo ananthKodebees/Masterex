@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="4dp"
+   >
+
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/close"
+        android:layout_alignParentTop="true"
+        android:id="@+id/close_image"
+        android:layout_alignParentEnd="true"
+        android:onClick="closeImage"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="A Course on C"
+        android:id="@+id/tvcourse"
+        android:layout_marginTop="3dp"
+        android:textSize="17sp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentTop="true"
+        android:textStyle="bold"
+        android:textColor="#525252"
+        android:layout_marginBottom="5dp"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="fitXY"
+        android:id="@+id/discover_first_image"
+        android:src="@drawable/image1"
+
+        android:layout_marginTop="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#95c7b3b3"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/discover_first_image"
+        android:layout_alignEnd="@+id/discover_first_image"
+        android:id="@+id/relativeLayout2">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A Course On C"
+            android:id="@+id/tvName"
+            android:textColor="#fefefe"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginLeft="5dp"
+            android:paddingBottom="16dp"
+            android:layout_alignParentStart="true"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Beginner"
+            android:id="@+id/tvDate"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:layout_alignBottom="@+id/tvName"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/tvPart"
+            android:layout_alignParentStart="true" />
+
+
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pay Now"
+        android:id="@+id/button2"
+        android:background="#5b6276"
+        android:textColor="#ffffff"
+        android:padding="15dp"
+        android:layout_marginRight="15dp"
+       android:layout_marginTop="10dp"
+        android:layout_below="@+id/discover_first_image"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>

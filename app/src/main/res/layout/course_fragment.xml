@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:background="#10807373">
+
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="A course on C"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:background="#E4E5E7"
+            android:id="@+id/textView"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:layout_marginTop="26dp"
+            android:src="@drawable/books"
+            android:layout_below="@+id/textView"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Course Content"
+            android:id="@+id/textView2"
+            android:textSize="15sp"
+            android:layout_below="@+id/imageView2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:textColor="#393232"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Course WebX Link"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginTop="25dp"
+            android:background="#E4E5E7"
+            android:id="@+id/courseLink"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_below="@+id/textView2"
+            android:layout_alignStart="@+id/textView"
+            android:paddingLeft="5dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="https://www.ul.to.xYZ"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:id="@+id/link"
+            android:textSize="15sp"
+            android:textColor="#040303"
+            android:paddingLeft="25dp"
+            android:layout_below="@+id/courseLink"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Frequently Asked Questions"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="#E4E5E7"
+            android:id="@+id/fquestions"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:paddingLeft="5dp"
+            android:layout_below="@+id/link"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="How to learn Android?"
+            android:paddingTop="5dp"
+            android:paddingLeft="25dp"
+            android:paddingBottom="5dp"
+            android:id="@+id/fquestion1"
+            android:textSize="15sp"
+            android:textColor="#060606"
+            android:layout_below="@+id/fquestions"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="How to ios?"
+            android:paddingTop="5dp"
+            android:paddingLeft="25dp"
+            android:paddingBottom="5dp"
+            android:id="@+id/fquestion2"
+            android:textSize="15sp"
+            android:textColor="#060606"
+            android:layout_below="@+id/fquestion1"
+            android:layout_alignStart="@+id/fquestion1"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="How to learn Obj C"
+            android:paddingTop="5dp"
+            android:paddingLeft="25dp"
+            android:paddingBottom="5dp"
+            android:id="@+id/fquestion3"
+            android:textSize="15sp"
+            android:textColor="#060606"
+            android:layout_below="@+id/fquestion2"
+            android:layout_alignStart="@+id/fquestion2"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="How to learn Php?"
+            android:paddingTop="5dp"
+            android:paddingLeft="25dp"
+            android:paddingBottom="5dp"
+            android:id="@+id/fquestion4"
+            android:textSize="15sp"
+            android:textColor="#060606"
+            android:layout_below="@+id/fquestion3"
+            android:layout_alignStart="@+id/fquestion3"
+            android:layout_marginTop="20dp"/>
+
+    </RelativeLayout>
+</ScrollView>
