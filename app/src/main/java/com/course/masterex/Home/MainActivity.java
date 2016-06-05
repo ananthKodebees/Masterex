@@ -1,5 +1,6 @@
 package com.course.masterex.Home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,11 +10,12 @@ import android.view.View;
 
 import com.course.masterex.R;
 import com.course.masterex.account.Login;
+import com.course.masterex.account.Register;
 
 /**
  * Created by DELL on 5/6/2016.
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
 
     @Override
@@ -33,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
     public void next_activity(View view)
     {
         Intent intent = new Intent(MainActivity.this, Login.class);
+        startActivity(intent);
+    }
+    public void register_activity(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, Register.class);
         startActivity(intent);
     }
 
