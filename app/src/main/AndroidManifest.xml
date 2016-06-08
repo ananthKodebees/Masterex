@@ -9,22 +9,27 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Home.MainActivity">
+        <activity android:name=".Screens.LoginRequestScreen"
+         >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".account.Login">
+        <activity android:name=".account.LoginScreen"
+           >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".Screens.HomeScreen">
 
-        <activity android:name=".common.Splash">
+        </activity>
+
+        <activity android:name=".Screens.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +38,7 @@
         </activity>
 
 
-        <activity android:name=".account.Register">
+        <activity android:name=".account.RegisterScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,10 +47,11 @@
         </activity>
 
         <activity
-            android:name=".Home.Main2Activity"
+            android:name=".Screens.Toolbar"
             android:label="@string/title_activity_main2"
-            android:parentActivityName=".Home.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:parentActivityName=".Screens.LoginRequestScreen"
+            android:theme="@style/AppTheme.NoActionBar"
+           >
 
 
             <intent-filter>

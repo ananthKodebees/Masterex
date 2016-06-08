@@ -92,8 +92,8 @@
         android:id="@+id/button2"
         android:background="#5b6276"
         android:textColor="#ffffff"
-        android:padding="15dp"
-        android:layout_marginRight="15dp"
+
+
        android:layout_marginTop="10dp"
         android:layout_below="@+id/discover_first_image"
         android:layout_alignParentEnd="true" />

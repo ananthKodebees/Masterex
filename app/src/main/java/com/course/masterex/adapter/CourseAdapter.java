@@ -1,12 +1,12 @@
 package com.course.masterex.adapter;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,51 +16,60 @@ import com.course.masterex.R;
 import java.util.ArrayList;
 
 
-public class CourseAdapter extends ArrayAdapter<ContentDiscover>{
+public class CourseAdapter extends BaseAdapter{
 
-    public CourseAdapter(Context context, ArrayList<ContentDiscover> users) {
-        super(context, 0, users);
+    private ArrayList<ContentDiscover> list;
+    private final Activity context;
+
+
+   public CourseAdapter(ArrayList<ContentDiscover> list , Activity context) {
+       this.list = list;
+       this.context = context;
+   }
+
+
+    public ArrayList getlist(){
+
+        return list;
     }
 
-
+    public void setId(ArrayList list) {
+        this.list = list;
+    }
 
     @Override
     public int getCount() {
-        return super.getCount();
+        return list.size();
     }
 
     @Override
-    public ContentDiscover getItem(int position) {
-        return super.getItem(position);
+    public Object getItem(int position) {
+        return null;
     }
 
-    @Override
-    public int getPosition(ContentDiscover item) {
-        return super.getPosition(item);
-    }
 
     @Override
     public long getItemId(int position) {
-        return super.getItemId(position);
+        return 0;
     }
 
     @Override
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ContentDiscover user = getItem(position);
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.content_discover, parent, false);
-        }
+        ContentDiscover user = list.get(position);
+        LayoutInflater inflater = context.getLayoutInflater();
+        View rowView = inflater.inflate(R.layout.content_discover, null, true);
 
-        TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-        TextView tvPart = (TextView) convertView.findViewById(R.id.tvPart);
-        TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);
-        ImageView image = (ImageView) convertView.findViewById(R.id.discover_first_image);
 
-        tvName.setText(user.name);
-        tvPart.setText(user.description);
-        tvDate.setText(user.participants);
+        TextView tvName = (TextView) rowView.findViewById(R.id.tvName);
+        TextView tvPart = (TextView) rowView.findViewById(R.id.tvPart);
+        TextView tvDate = (TextView) rowView.findViewById(R.id.tvDate);
+        ImageView image = (ImageView) rowView.findViewById(R.id.discover_first_image);
+
+        tvName.setText(user.getType().toString());
+        tvPart.setText(user.getName().toString());
+        tvDate.setText(user.getName().toString());
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,27 +77,32 @@ public class CourseAdapter extends ArrayAdapter<ContentDiscover>{
             }
         });
 
-        return convertView;
+        return rowView;
 
     }
 
     private void saveImage() {
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
-        alertDialogBuilder.setMessage(R.string.save_alert);
-        alertDialogBuilder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getcontext());
+       alertDialogBuilder.setMessage(R.string.save_alert);
+       alertDialogBuilder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface dialog, int which) {
 
-            }
-        });
+           }
+       });
         alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
             }
         });
-        alertDialogBuilder.show();
+       alertDialogBuilder.show();
     }
 
+
+    public Activity getcontext() {
+        return context;
+    }
 }
+

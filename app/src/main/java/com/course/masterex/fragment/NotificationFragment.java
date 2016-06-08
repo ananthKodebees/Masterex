@@ -13,9 +13,7 @@ import com.course.masterex.R;
  */
 public class NotificationFragment extends Fragment {
 
-
     View view;
-
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

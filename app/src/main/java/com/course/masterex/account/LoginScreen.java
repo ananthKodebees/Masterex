@@ -1,17 +1,14 @@
 package com.course.masterex.account;
 
 import android.app.Activity;
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -20,47 +17,33 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.course.masterex.Home.Main2Activity;
-import com.course.masterex.R;
-import com.course.masterex.preference.SharedPreference;
-import com.course.masterex.service.ServerRequest;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
+import com.course.masterex.Screens.HomeScreen;
+import com.course.masterex.R;
+import com.course.masterex.common.Constants;
+import com.course.masterex.common.Utils;
+import com.course.masterex.preference.AppPreference;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
-public class Login extends Activity {
+public class LoginScreen extends Activity {
     EditText username, password;
     Button signin;
     private RequestQueue requestQueue;
-    private  static final String URL = "http://192.168.1.7:3000/login";
+
     private StringRequest request;
     private boolean loggedIn = false;
+    private String url = "login";
+    private String URL = Constants.URL+url;
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        SharedPreferences sharedPreferences = getSharedPreferences(SharedPreference.SHARED_PREF_NAME,Context.MODE_PRIVATE);
-        loggedIn = sharedPreferences.getBoolean(SharedPreference.LOGGEDIN_SHARED_PREF, false);
-        if(loggedIn){
 
-            startActivity(new Intent(getApplicationContext(), Main2Activity.class));
-        }
 
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,28 +60,31 @@ public class Login extends Activity {
             public void onClick(View v) {
 
                 request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             Log.e("ananth", response );
-
+                                Log.e("url",URL);
                           boolean status =  jsonObject.getBoolean("status");
 
                             if(status){
 
-                                SharedPreferences sharedPreferences = getSharedPreferences(SharedPreference.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                                SharedPreferences sharedPreferences = getSharedPreferences(AppPreference.SHARED_PREF_NAME, Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                                editor.putBoolean(SharedPreference.LOGGEDIN_SHARED_PREF, true);
-                                editor.putString(SharedPreference.USER_NAME, username.getText().toString());
+                                editor.putBoolean(AppPreference.LOGGEDIN_SHARED_PREF, true);
+                                editor.putString(AppPreference.USER_NAME, username.getText().toString());
                                 editor.commit();
 
-                                Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(), Main2Activity.class));
+                                Utils.Toast(getApplicationContext(),jsonObject.getString("message"));
+
+                                startActivity(new Intent(getApplicationContext(), HomeScreen.class));
+                                finish();
                             }
                             else {
-                                Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+                                Utils.Toast(getApplicationContext(), jsonObject.getString("message"));
                             }
 
                         } catch (JSONException e) {
