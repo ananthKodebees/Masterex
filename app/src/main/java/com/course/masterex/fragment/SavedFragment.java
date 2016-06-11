@@ -17,8 +17,6 @@ import java.util.ArrayList;
 
 public class SavedFragment  extends Fragment {
 
-
-
     View view;
 
 

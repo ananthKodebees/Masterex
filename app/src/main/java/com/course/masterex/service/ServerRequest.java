@@ -15,6 +15,7 @@ public class ServerRequest extends AsyncTask<String, String, String> {
 
     private ServerResponse serverResponse;
 
+
     private static String url ;
 
     private ProgressDialog pDialog;

@@ -22,6 +22,7 @@ import com.course.masterex.Screens.HomeScreen;
 import com.course.masterex.R;
 import com.course.masterex.common.Constants;
 import com.course.masterex.common.Utils;
+import com.course.masterex.fragment.ProfileFragment;
 import com.course.masterex.preference.AppPreference;
 
 import org.json.JSONException;
@@ -39,10 +40,10 @@ public class LoginScreen extends Activity {
 
     private StringRequest request;
     private boolean loggedIn = false;
-    private String url = "login";
-    private String URL = Constants.URL+url;
 
+    private String URL = Constants.baseURL+Constants.loginURL;
 
+SharedPreferences sharedPreferences;
 
 
     @Override
@@ -66,16 +67,20 @@ public class LoginScreen extends Activity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             Log.e("ananth", response );
-                                Log.e("url",URL);
+                                Log.e("url", URL);
                           boolean status =  jsonObject.getBoolean("status");
+                            String id = jsonObject.getString("id");
+                            Log.e("id", id);
 
                             if(status){
 
-                                SharedPreferences sharedPreferences = getSharedPreferences(AppPreference.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                          sharedPreferences = getSharedPreferences(AppPreference.SHARED_PREF_NAME, Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
                                 editor.putBoolean(AppPreference.LOGGEDIN_SHARED_PREF, true);
                                 editor.putString(AppPreference.USER_NAME, username.getText().toString());
+
+                                editor.putString("Id",id);
                                 editor.commit();
 
                                 Utils.Toast(getApplicationContext(),jsonObject.getString("message"));
@@ -110,6 +115,9 @@ public class LoginScreen extends Activity {
             }
         });
 
+    }
+
+    private void method() {
     }
 }
 

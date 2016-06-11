@@ -35,9 +35,9 @@ public class RegisterScreen extends AppCompatActivity {
     Button register;
 
     private RequestQueue requestQueue;
-    private  static final String url = "register";
 
-    private String URL =  Constants.URL+url;
+
+    private String URL =  Constants.baseURL+Constants.registerURL;
     private StringRequest stringRequest;
 
 

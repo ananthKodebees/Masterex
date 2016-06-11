@@ -1,6 +1,8 @@
 package com.course.masterex.fragment;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.widget.ListView;
 
 import com.course.masterex.R;
 import com.course.masterex.adapter.CourseAdapter;
+import com.course.masterex.common.Constants;
 import com.course.masterex.model.ContentDiscover;
 import com.course.masterex.service.ServerRequest;
 import com.course.masterex.service.ServerResponse;
@@ -27,7 +30,10 @@ public class DiscoverFragment extends Fragment implements ServerResponse{
 
     View view;
 
-    public static String url ="http://192.168.1.8:3000/courselist";
+    public static String url = Constants.baseURL+Constants.courseURL;
+
+
+
 
     ArrayList<ContentDiscover> list = new ArrayList<>();
     private ListAdapter adap;
