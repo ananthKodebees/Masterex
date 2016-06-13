@@ -16,6 +16,7 @@ import com.course.masterex.R;
 import com.course.masterex.adapter.CourseAdapter;
 import com.course.masterex.common.Constants;
 import com.course.masterex.model.ContentDiscover;
+import com.course.masterex.preference.AppPreference;
 import com.course.masterex.service.ServerRequest;
 import com.course.masterex.service.ServerResponse;
 
@@ -65,14 +66,20 @@ public class DiscoverFragment extends Fragment implements ServerResponse{
                 for (int i = 0; i < courselist.length(); i++) {
                     JSONObject obj = courselist.getJSONObject(i);
 
-                    String courseId = obj.getString("courseId");
+                    String courseId = obj.getString("_id");
                     Log.e("courseId", courseId);
+
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences(AppPreference.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    editor.commit();
+
                     String courseName = obj.getString("courseName");
                     Log.e("courseName",courseName );
                     String courseType = obj.getString("courseType");
                     Log.e("courseType",courseType );
 
-                    ContentDiscover course = new ContentDiscover(courseName,courseType,courseName);
+                    ContentDiscover course = new ContentDiscover(courseName,courseType,courseId);
                     list.add(course);
 
 

@@ -16,7 +16,7 @@ public class Constants {
 
     public static String profileURL = "profile";
 
-
+    public static String saveCourseURL = "savedCourse";
 
 
 }

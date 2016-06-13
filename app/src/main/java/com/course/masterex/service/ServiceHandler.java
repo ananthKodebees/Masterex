@@ -30,7 +30,7 @@ public class ServiceHandler {
         return this.makeServiceCall(url, method, null);
     }
 
-    private String makeServiceCall(String url, int method,List<NameValuePair> params) {
+    public String makeServiceCall(String url, int method, List<NameValuePair> params) {
 
         try{
             DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -41,6 +41,7 @@ public class ServiceHandler {
                 HttpPost httpPost = new HttpPost(url);
 
                 if (params != null) {
+
                     httpPost.setEntity(new UrlEncodedFormEntity(params));
                 }
 
@@ -74,5 +75,6 @@ public class ServiceHandler {
         return response;
 
     }
+
 
 }

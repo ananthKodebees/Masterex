@@ -6,7 +6,12 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.course.masterex.adapter.CourseAdapter;
 import com.course.masterex.fragment.DiscoverFragment;
+
+import org.apache.http.NameValuePair;
+
+import java.util.List;
 
 public class ServerRequest extends AsyncTask<String, String, String> {
 
@@ -15,10 +20,12 @@ public class ServerRequest extends AsyncTask<String, String, String> {
 
     private ServerResponse serverResponse;
 
+   List<NameValuePair> values;
 
     private static String url ;
 
     private ProgressDialog pDialog;
+
 
 
     public ServerRequest(Activity activity,String url,ServerResponse serverResponse){
@@ -29,7 +36,13 @@ public class ServerRequest extends AsyncTask<String, String, String> {
 
     }
 
+    public ServerRequest(Activity activity,String url,List<NameValuePair> values){
 
+        this.url = url;
+        this.activity = activity;
+        this.values = values;
+
+    }
 
     @Override
     protected void onPreExecute() {
@@ -46,9 +59,7 @@ public class ServerRequest extends AsyncTask<String, String, String> {
         ServiceHandler sh = new ServiceHandler();
 
         String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
-
-
-
+        String postStr = sh.makeServiceCall(url, ServiceHandler.POST,values);
 
         return jsonStr ;
     }
