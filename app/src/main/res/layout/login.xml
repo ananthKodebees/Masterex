@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="80dp"
-    android:layout_marginLeft="25dp"
-    android:orientation="vertical"
+    android:background="@drawable/signin"
+    android:layout_gravity="bottom"
+    android:alpha="0.9"
     >
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Username"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="#ffffff"
+        android:layout_above="@+id/etusername"
+        android:layout_gravity="bottom"
         android:id="@+id/textView3" />
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:id="@+id/etusername"
-        android:layout_gravity="center_horizontal" />
+        android:layout_above="@+id/textView4"
+        android:textColor="#ffff"
+       android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#99000000"
+
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,18 +39,36 @@
         android:text="Password"
         android:id="@+id/textView4"
         android:layout_marginTop="20dp"
+        android:layout_above="@+id/etpassword"
+        android:textColor="#ffffff"
+        android:textSize="17sp"
+        android:textStyle="bold"
         />
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:id="@+id/etpassword"
+        android:background="#99000000"
+        android:layout_marginLeft="20dp"
+        android:textColor="#ffff"
+        android:layout_marginRight="20dp"
+        android:layout_above="@+id/blogin"
         android:layout_gravity="center_horizontal" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Signin"
+        android:textStyle="bold"
+        android:layout_marginLeft="30dp"
+        android:textColor="#fffefe"
+        android:layout_marginRight="30dp"
+        android:background="#98000000"
+      android:layout_marginTop="12dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
         android:id="@+id/blogin"
-        android:layout_gravity="center_horizontal" />
-</LinearLayout>
+         />
+
+</RelativeLayout>

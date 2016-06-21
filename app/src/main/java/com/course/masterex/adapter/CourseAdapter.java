@@ -21,6 +21,7 @@ import com.course.masterex.common.Utils;
 import com.course.masterex.model.ContentDiscover;
 import com.course.masterex.R;
 import com.course.masterex.preference.AppPreference;
+import com.course.masterex.service.RequestId;
 import com.course.masterex.service.ServerRequest;
 import com.course.masterex.service.ServerResponse;
 import com.course.masterex.service.ServiceHandler;
@@ -40,7 +41,7 @@ public class CourseAdapter extends BaseAdapter implements ServerResponse {
     private ArrayList<ContentDiscover> list;
     private final Activity context;
 
-String url = Constants.baseURL+Constants.saveCourseURL;
+String url = Constants.SavedUrL;
 
 
 
@@ -119,10 +120,12 @@ String url = Constants.baseURL+Constants.saveCourseURL;
            public void onClick(DialogInterface dialog, int which) {
 
                List<NameValuePair> values = new ArrayList<NameValuePair>();
-               values.add(new BasicNameValuePair("userId", id));
-               values.add(new BasicNameValuePair("courseId", courseId));
+               values.add(new BasicNameValuePair("userid", id));
+               Log.e("Id", id);
+               Log.e("courseId", courseId);
+               values.add(new BasicNameValuePair("courseid", courseId));
 
-               ServerRequest serverRequest = new ServerRequest(context,url, values);
+               ServerRequest serverRequest = new ServerRequest(context,url,ServiceHandler.POST, CourseAdapter.this, RequestId.SAVE_REQUEST,values);
                serverRequest.execute("");
 
            }
@@ -141,17 +144,21 @@ String url = Constants.baseURL+Constants.saveCourseURL;
         return context;
     }
 
-    @Override
-    public void onResponse(String response) {
 
+
+
+
+
+    @Override
+    public void onResponse(RequestId requestId, String response) {
         try {
             JSONObject obj  = new JSONObject(response);
 
             boolean status = obj.getBoolean("status");
             if(status){
                 String message = obj.getString("message");
-
                 Utils.Toast(getcontext(),message);
+                Log.e("message", message);
             }
         } catch (JSONException e) {
             e.printStackTrace();

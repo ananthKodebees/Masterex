@@ -17,8 +17,10 @@ import com.course.masterex.adapter.CourseAdapter;
 import com.course.masterex.common.Constants;
 import com.course.masterex.model.ContentDiscover;
 import com.course.masterex.preference.AppPreference;
+import com.course.masterex.service.RequestId;
 import com.course.masterex.service.ServerRequest;
 import com.course.masterex.service.ServerResponse;
+import com.course.masterex.service.ServiceHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,7 +33,7 @@ public class DiscoverFragment extends Fragment implements ServerResponse{
 
     View view;
 
-    public static String url = Constants.baseURL+Constants.courseURL;
+    public static String url = Constants.CourseURL;
 
 
 
@@ -41,6 +43,7 @@ public class DiscoverFragment extends Fragment implements ServerResponse{
     JSONArray courselist = null;
     ListView listview;
 
+
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -49,13 +52,15 @@ public class DiscoverFragment extends Fragment implements ServerResponse{
 
         listview = (ListView) view.findViewById(R.id.lv_users);
 
-        ServerRequest serverRequest = new ServerRequest(getActivity(),url,DiscoverFragment.this);
+        ServerRequest serverRequest = new ServerRequest(getActivity(),url,ServiceHandler.GET,DiscoverFragment.this, RequestId.COURSE_REQUEST,null);
         serverRequest.execute("");
         return view;
     }
 
+
+
     @Override
-    public void onResponse(String response) {
+    public void onResponse(RequestId requestId, String response) {
         if (response != null) {
             try {
 
@@ -94,6 +99,7 @@ public class DiscoverFragment extends Fragment implements ServerResponse{
         }
         adap= new CourseAdapter(list,getActivity());
         listview.setAdapter(adap);
-    }}
+    }
+}
 
 

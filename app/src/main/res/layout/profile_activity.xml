@@ -13,10 +13,11 @@
 
         <ImageView
             android:layout_width="300dp"
-            android:layout_height="280dp"
+            android:layout_height="250dp"
             android:scaleType="fitXY"
             android:src="@drawable/image1"
             android:background="#95c7b3b3"
+            android:id="@+id/profile_image"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
@@ -34,41 +35,15 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true" />
 
-
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/books"
-            android:id="@+id/profile_logo"
-            android:layout_below="@+id/edit_image"
-            android:layout_centerHorizontal="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Ananth"
-            android:id="@+id/profile_name"
-            android:textStyle="bold"
-            android:textColor="#fdfcfc"
-            android:layout_below="@+id/profile_logo"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:textSize="15sp"/>
-
-
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Courses Saved"
+            android:text="PROFILE"
             android:id="@+id/button"
-            android:layout_marginTop="42dp"
             android:background="#5b6276"
             android:textColor="#ffffff"
             android:textStyle="bold"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:layout_below="@+id/profile_name"
+            android:layout_below="@+id/profile_image"
             android:layout_alignParentStart="true"
             android:textSize="15sp"
             android:layout_alignParentEnd="true" />
@@ -77,47 +52,44 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:id="@+id/etuser"
-           android:hint="Username"
             android:padding="20dp"
-            android:layout_marginLeft="20dp"
+            android:editable="false"
+            android:layout_marginLeft="80dp"
             android:layout_below="@+id/button"
             android:layout_alignParentStart="true"
             android:textSize="15sp"
             android:layout_marginTop="10dp"/>
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:id="@+id/etpass"
             android:padding="20dp"
-            android:layout_marginLeft="20dp"
-            android:hint="password"
+            android:layout_marginLeft="80dp"
             android:layout_below="@+id/etuser"
-            android:layout_alignParentStart="true"
             android:layout_alignEnd="@+id/etuser"
             android:textSize="15sp"
             android:layout_marginTop="10dp"/>
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:id="@+id/etfirst"
             android:padding="20dp"
-            android:layout_marginLeft="20dp"
-            android:hint="Firstname"
+            android:layout_marginLeft="80dp"
+
             android:layout_below="@+id/etpass"
-            android:layout_alignParentStart="true"
+
             android:layout_alignEnd="@+id/etpass"
             android:textSize="15sp"
             android:layout_marginTop="10dp"/>
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:id="@+id/etlast"
             android:padding="20dp"
-            android:layout_marginLeft="20dp"
-            android:hint="Lastname"
+            android:layout_marginLeft="80dp"
             android:layout_below="@+id/etfirst"
             android:layout_alignParentStart="true"
             android:layout_alignEnd="@+id/etfirst"
@@ -127,14 +99,58 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save"
+            android:text="update"
             android:layout_below="@+id/etlast"
-            android:layout_marginLeft="30dp"
-            android:id="@+id/button3"
-            android:visibility="gone"
+            android:layout_marginLeft="100dp"
+            android:id="@+id/bupdate"
+            android:layout_marginTop="10dp"
+            android:visibility="invisible"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UserName"
+            android:layout_marginBottom="15dp"
+            android:id="@+id/textView7"
+            android:layout_alignBottom="@+id/etuser"
+
+
             android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PassWord"
+            android:layout_marginBottom="15dp"
+            android:id="@+id/textView8"
+            android:layout_alignLeft="@+id/bupdate"
+            android:layout_alignStart="@+id/bupdate"
+            android:layout_alignBottom="@+id/etpass"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FirstName"
+            android:id="@+id/textView9"
+            android:layout_marginBottom="15dp"
+            android:layout_alignBottom="@+id/etfirst"
+
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LastName"
+            android:layout_marginBottom="15dp"
+            android:id="@+id/textView10"
+            android:layout_above="@+id/bupdate"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
     </RelativeLayout>
 
 </ScrollView>

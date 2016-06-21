@@ -11,13 +11,6 @@ import com.course.masterex.service.ServerResponse;
  */
 public class AppPreference {
 
-    public static final String SHARED_PREF_NAME = "Masterex";
-
-    public static final String USER_NAME = "user";
-
-    public static final String LOGGEDIN_SHARED_PREF = "loggedin";
-
-
 
 
 

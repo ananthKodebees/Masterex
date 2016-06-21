@@ -23,26 +23,22 @@ public class ServerRequest extends AsyncTask<String, String, String> {
    List<NameValuePair> values;
 
     private static String url ;
-
+int method;
     private ProgressDialog pDialog;
 
+RequestId requestId;
 
-
-    public ServerRequest(Activity activity,String url,ServerResponse serverResponse){
+    public ServerRequest(Activity activity,String url,int method,ServerResponse serverResponse, RequestId requestId, List<NameValuePair>values){
 
         this.url = url;
         this.activity = activity;
         this.serverResponse = serverResponse;
-
-    }
-
-    public ServerRequest(Activity activity,String url,List<NameValuePair> values){
-
-        this.url = url;
-        this.activity = activity;
+        this.requestId = requestId;
+        this.method = method;
         this.values = values;
 
     }
+
 
     @Override
     protected void onPreExecute() {
@@ -58,8 +54,8 @@ public class ServerRequest extends AsyncTask<String, String, String> {
     protected String doInBackground(String... params) {
         ServiceHandler sh = new ServiceHandler();
 
-        String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
-        String postStr = sh.makeServiceCall(url, ServiceHandler.POST,values);
+        String jsonStr = sh.makeServiceCall(url, method,values);
+
 
         return jsonStr ;
     }
@@ -69,7 +65,7 @@ public class ServerRequest extends AsyncTask<String, String, String> {
         super.onPostExecute(result);
         pDialog.dismiss();
         if(result != null ) {
-            serverResponse.onResponse(result);
+            serverResponse.onResponse(requestId,result);
             Log.e("Response: ", "> " + result);
         }
 

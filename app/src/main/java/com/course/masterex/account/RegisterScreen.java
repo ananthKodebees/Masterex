@@ -20,24 +20,32 @@ import com.android.volley.toolbox.Volley;
 
 import com.course.masterex.Screens.HomeScreen;
 import com.course.masterex.R;
+import com.course.masterex.base.BaseActivity;
 import com.course.masterex.common.Constants;
 import com.course.masterex.common.Utils;
+import com.course.masterex.service.RequestId;
+import com.course.masterex.service.ServerRequest;
+import com.course.masterex.service.ServerResponse;
+import com.course.masterex.service.ServiceHandler;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
-public class RegisterScreen extends AppCompatActivity {
+public class RegisterScreen extends BaseActivity implements ServerResponse{
     EditText registeruser, registerpass, firstname, lastname;
     Button register;
 
     private RequestQueue requestQueue;
 
-
-    private String URL =  Constants.baseURL+Constants.registerURL;
+    private String url =  Constants.RegisterURL;
     private StringRequest stringRequest;
 
 
@@ -61,48 +69,16 @@ public class RegisterScreen extends AppCompatActivity {
                 final String fname = firstname.getText().toString();
                 final String lname = lastname.getText().toString();
 
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                try {
-                                    JSONObject jsonObject = new JSONObject(response);
-                                    Log.e("register", response);
-                                    Log.e("URL",URL );
-                                    boolean status = jsonObject.getBoolean("status");
-                                    if (status) {
-                                        Utils.Toast(getApplicationContext(),jsonObject.getString("message"));
-                                        startActivity(new Intent(getApplicationContext(), HomeScreen.class));
-                                        finish();
-                                    } else {
-                                        Utils.Toast(getApplicationContext(), jsonObject.getString("message"));
-                                    }
+                List<NameValuePair> registerValues = new ArrayList<NameValuePair>();
+                registerValues.add(new BasicNameValuePair("username",reguser));
+                registerValues.add(new BasicNameValuePair("password", regpass));
+                registerValues.add(new BasicNameValuePair("firstname", fname));
+                registerValues.add(new BasicNameValuePair("lastname", lname));
 
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
+                ServerRequest serverRequest = new ServerRequest(RegisterScreen.this,url, ServiceHandler.POST, RegisterScreen.this, null,registerValues);
+                serverRequest.execute("");
 
 
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.e("Error", "" + error.getMessage());
-
-                            }
-                        }) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        HashMap<String, String> hashMap = new HashMap<String, String>();
-                        hashMap.put("username", reguser);
-                        hashMap.put("password", regpass);
-                        hashMap.put("firstname", fname);
-                        hashMap.put("lastname", lname);
-                        return hashMap;
-                    }
-                };
-                requestQueue.add(stringRequest);
             }
         });
 
@@ -128,4 +104,23 @@ public class RegisterScreen extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onResponse(RequestId requestId, String response) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            Log.e("register", response);
+            Log.e("URL",url );
+            boolean status = jsonObject.getBoolean("status");
+            if (status) {
+                Utils.Toast(getApplicationContext(),jsonObject.getString("message"));
+                startActivity(new Intent(getApplicationContext(), LoginScreen.class));
+                finish();
+            } else {
+                Utils.Toast(getApplicationContext(), jsonObject.getString("message"));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
+}

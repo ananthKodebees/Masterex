@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -26,24 +27,30 @@ import com.android.volley.toolbox.Volley;
 import com.course.masterex.R;
 import com.course.masterex.account.LoginScreen;
 import com.course.masterex.common.Constants;
+import com.course.masterex.common.Utils;
 import com.course.masterex.model.ContentDiscover;
 import com.course.masterex.model.ContentProfile;
 import com.course.masterex.preference.AppPreference;
+import com.course.masterex.service.RequestId;
 import com.course.masterex.service.ServerRequest;
 import com.course.masterex.service.ServerResponse;
+import com.course.masterex.service.ServiceHandler;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
-public class ProfileFragment  extends Fragment  {
+public class ProfileFragment  extends Fragment implements ServerResponse  {
 
-    public static String url = Constants.baseURL+Constants.profileURL;
+    public static String url = Constants.ProfileURL;
 
     JSONArray profile = null;
 
@@ -52,6 +59,8 @@ public class ProfileFragment  extends Fragment  {
     private StringRequest request;
     ImageView imageView;
     EditText username, pass, firstname, lastname;
+    Button update;
+
 
     View view;
 
@@ -64,14 +73,54 @@ public class ProfileFragment  extends Fragment  {
         pass= (EditText) view.findViewById(R.id.etpass);
         firstname = (EditText) view.findViewById(R.id.etfirst);
         lastname = (EditText) view.findViewById(R.id.etlast);
+        imageView = (ImageView) view.findViewById(R.id.edit_image);
+        update = (Button) view.findViewById(R.id.bupdate);
 
-//         imageView.setClickable(true);
-  //    imageView.setOnClickListener(new View.OnClickListener() {
-   //       @Override
-   //       public void onClick(View v) {
-   //           editImage();
-    //      }
-   //    });
+        pass.setClickable(false);
+        pass.setFocusable(false);
+        firstname.setClickable(false);
+        firstname.setFocusable(false);
+        lastname.setClickable(false);
+        lastname.setFocusable(false);
+        update.setVisibility(View.INVISIBLE);
+
+
+
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final String password  = pass.getText().toString();
+                final String first  = firstname.getText().toString();
+                final String last  = lastname.getText().toString();
+
+                String url = Constants.UpdateUrL;
+                Log.e("updateURL",url );
+
+
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(AppPreference.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                final String id = sharedPreferences.getString("Id", "");
+                Log.e("ID", id);
+
+                List<NameValuePair> update = new ArrayList<NameValuePair>();
+                update.add(new BasicNameValuePair("_id",id));
+                update.add( new BasicNameValuePair("password",password));
+                update.add( new BasicNameValuePair("firstname",first));
+                update.add( new BasicNameValuePair("lastname",last));
+
+                ServerRequest serverRequest = new ServerRequest(getActivity(),url, ServiceHandler.POST, ProfileFragment.this, null,update);
+                serverRequest.execute("");
+            }
+        });
+
+       imageView.setClickable(false);
+     imageView.setOnClickListener(new View.OnClickListener() {
+         @Override
+          public void onClick(View v) {
+             editImage();
+          }
+       });
         SharedPreferences   sharedPreferences = getActivity().getSharedPreferences(AppPreference.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         final String id = sharedPreferences.getString("Id", "");
         Log.e("ID",id );
@@ -139,6 +188,17 @@ JSONObject profile = (new JSONObject(response)).getJSONObject("profile");
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                pass.setClickable(true);
+                pass.setFocusable(true);
+                pass.setFocusableInTouchMode(true);
+                firstname.setClickable(true);
+                firstname.setFocusableInTouchMode(true);
+                firstname.setFocusable(true);
+                lastname.setClickable(true);
+                lastname.setFocusable(true);
+                lastname.setFocusableInTouchMode(true);
+                update.setVisibility(View.VISIBLE);
+
             }
         });
         alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -148,5 +208,21 @@ JSONObject profile = (new JSONObject(response)).getJSONObject("profile");
             }
         });
         alertDialogBuilder.show();
+    }
+
+    @Override
+    public void onResponse(RequestId requestId, String response) {
+        try {
+            JSONObject obj  = new JSONObject(response);
+
+            boolean status = obj.getBoolean("status");
+            if(status){
+                String message = obj.getString("message");
+                Utils.Toast(getActivity(), message);
+                Log.e("message", message);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
