@@ -43,10 +43,9 @@ public class RegisterScreen extends BaseActivity implements ServerResponse{
     EditText registeruser, registerpass, firstname, lastname;
     Button register;
 
-    private RequestQueue requestQueue;
+
 
     private String url =  Constants.RegisterURL;
-    private StringRequest stringRequest;
 
 
     @Override
@@ -59,7 +58,7 @@ public class RegisterScreen extends BaseActivity implements ServerResponse{
         firstname = (EditText) findViewById(R.id.etfirstname);
         lastname = (EditText)findViewById(R.id.etlastname);
         register = (Button) findViewById(R.id.bregister);
-        requestQueue = Volley.newRequestQueue(this);
+
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override

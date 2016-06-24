@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import com.course.masterex.R;
 import com.course.masterex.account.LoginScreen;
 import com.course.masterex.adapter.PagerAdapter;
+import com.course.masterex.common.Constants;
 import com.course.masterex.preference.AppPreference;
 import com.viewpagerindicator.TabPageIndicator;
 
@@ -56,11 +57,11 @@ public class HomeScreen extends ActionBarActivity {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
 
-                        SharedPreferences preferences = getSharedPreferences(AppPreference.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                        SharedPreferences preferences = getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
 
-                        editor.putBoolean(AppPreference.LOGGEDIN_SHARED_PREF, false);
-                        editor.putString(AppPreference.USER_NAME, "");
+                        editor.putBoolean(Constants.LOGGEDIN_SHARED_PREF, false);
+                        editor.putString(Constants.USER_NAME, "");
                         editor.commit();
 
                         Intent intent = new Intent(HomeScreen.this, LoginScreen.class);

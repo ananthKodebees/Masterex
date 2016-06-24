@@ -3,10 +3,14 @@ package com.course.masterex.service;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.course.masterex.adapter.CourseAdapter;
+import com.course.masterex.common.Utils;
 import com.course.masterex.fragment.DiscoverFragment;
 
 import org.apache.http.NameValuePair;
@@ -23,7 +27,7 @@ public class ServerRequest extends AsyncTask<String, String, String> {
    List<NameValuePair> values;
 
     private static String url ;
-int method;
+    int method;
     private ProgressDialog pDialog;
 
 RequestId requestId;
@@ -68,6 +72,21 @@ RequestId requestId;
             serverResponse.onResponse(requestId,result);
             Log.e("Response: ", "> " + result);
         }
+
+    }
+    public boolean isConnectingToInternet(){
+        ConnectivityManager connectivity = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null)
+        {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null)
+                for (int i = 0; i < info.length; i++)
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED)
+                    {
+                        return true;
+                    }
+        }
+        return false;
 
     }
 

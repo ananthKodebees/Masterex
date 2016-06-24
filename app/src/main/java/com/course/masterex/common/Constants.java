@@ -1,5 +1,8 @@
 package com.course.masterex.common;
 
+import android.content.Context;
+import android.content.Intent;
+
 import java.net.URL;
 
 
@@ -25,5 +28,13 @@ public class Constants {
     public static final String USER_NAME = "user";
 
     public static final String LOGGEDIN_SHARED_PREF = "loggedin";
+
+   public  static final String SENDER_ID = "94719058979";
+
+    static final String TAG = "Masterex GCM";
+
+
+    static final String EXTRA_MESSAGE = "message";
+
 }
 

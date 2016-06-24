@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.course.masterex.R;
 import com.course.masterex.base.BaseActivity;
+import com.course.masterex.common.Constants;
 import com.course.masterex.preference.AppPreference;
 
 
@@ -18,8 +19,8 @@ public class SplashScreen extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences sharedPreferences = getSharedPreferences(AppPreference.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        loggedIn = sharedPreferences.getBoolean(AppPreference.LOGGEDIN_SHARED_PREF, false);
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        loggedIn = sharedPreferences.getBoolean(Constants.LOGGEDIN_SHARED_PREF, false);
     }
 
     @Override

@@ -74,7 +74,7 @@ public class DiscoverFragment extends Fragment implements ServerResponse{
                     String courseId = obj.getString("_id");
                     Log.e("courseId", courseId);
 
-                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences(AppPreference.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
 
                     editor.commit();

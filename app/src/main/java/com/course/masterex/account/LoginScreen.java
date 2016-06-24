@@ -1,6 +1,5 @@
 package com.course.masterex.account;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,50 +9,48 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import com.course.masterex.Screens.HomeScreen;
 import com.course.masterex.R;
+import com.course.masterex.Screens.HomeScreen;
 import com.course.masterex.common.Constants;
 import com.course.masterex.common.Utils;
-import com.course.masterex.fragment.ProfileFragment;
-import com.course.masterex.preference.AppPreference;
 import com.course.masterex.service.RequestId;
 import com.course.masterex.service.ServerRequest;
 import com.course.masterex.service.ServerResponse;
 import com.course.masterex.service.ServiceHandler;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class LoginScreen extends ActionBarActivity implements ServerResponse {
     EditText username, password;
     Button signin;
-    private RequestQueue requestQueue;
 
-    private StringRequest request;
+
     private boolean loggedIn = false;
 
     private String url = Constants.LoginURL;
 
 SharedPreferences sharedPreferences;
 
+    GoogleCloudMessaging googleCloudMessaging;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        loggedIn = sharedPreferences.getBoolean(Constants.LOGGEDIN_SHARED_PREF, false);
+        registerGcm();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,15 +60,20 @@ SharedPreferences sharedPreferences;
         username = (EditText) findViewById(R.id.etusername);
         password = (EditText) findViewById(R.id.etpassword);
         signin = (Button) findViewById(R.id.blogin);
-        requestQueue = Volley.newRequestQueue(this);
+
+        registerGcm();
 
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                final String gcmid = sharedPreferences.getString("gcmId", "");
+                Log.e("GCM",gcmid );
+
                 List<NameValuePair> loginValues = new ArrayList<NameValuePair>();
                 loginValues.add(new BasicNameValuePair("username", username.getText().toString()));
                 loginValues.add(new BasicNameValuePair("password", password.getText().toString()));
+                loginValues.add(new BasicNameValuePair("gcmId",gcmid));
 
                 ServerRequest serverRequest = new ServerRequest(LoginScreen.this, url, ServiceHandler.POST, LoginScreen.this, null, loginValues);
                 serverRequest.execute("");
@@ -80,6 +82,30 @@ SharedPreferences sharedPreferences;
             }
         });
     }
+
+    private void registerGcm() {
+
+        googleCloudMessaging = GoogleCloudMessaging.getInstance(this);
+        Thread timer = new Thread() {
+            public void run() {
+
+        try {
+            String gcmID = googleCloudMessaging.register(Constants.SENDER_ID);
+            Log.e("gcmId",gcmID );
+
+            sharedPreferences = getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("gcmId",gcmID);
+            editor.commit();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }}
+
+        };
+timer.start();
+    }
+
 
     @Override
     public void onResponse(RequestId requestId, String response) {
@@ -117,6 +143,7 @@ SharedPreferences sharedPreferences;
         }
 
     }
+
 
 
 }

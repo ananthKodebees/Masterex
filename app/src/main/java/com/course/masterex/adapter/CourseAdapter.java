@@ -98,7 +98,7 @@ String url = Constants.SavedUrL;
             @Override
             public void onClick(View v) {
 
-                SharedPreferences sharedPreferences = context.getSharedPreferences(AppPreference.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
                 final String id = sharedPreferences.getString("Id", "");
                 Log.e("ID", id);
                 String courseId = user.getId();

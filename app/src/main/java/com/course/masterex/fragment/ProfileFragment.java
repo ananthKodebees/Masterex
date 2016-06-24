@@ -99,7 +99,7 @@ public class ProfileFragment  extends Fragment implements ServerResponse  {
                 Log.e("updateURL",url );
 
 
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(AppPreference.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
                 final String id = sharedPreferences.getString("Id", "");
                 Log.e("ID", id);
 
@@ -121,9 +121,9 @@ public class ProfileFragment  extends Fragment implements ServerResponse  {
              editImage();
           }
        });
-        SharedPreferences   sharedPreferences = getActivity().getSharedPreferences(AppPreference.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences   sharedPreferences = getActivity().getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         final String id = sharedPreferences.getString("Id", "");
-        Log.e("ID",id );
+        Log.e("ID", id);
 
         request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
 

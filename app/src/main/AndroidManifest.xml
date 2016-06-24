@@ -9,6 +9,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+
         <activity android:name=".Screens.LoginRequestScreen"
          >
             <intent-filter>
@@ -46,20 +48,16 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".Screens.Toolbar"
-            android:label="@string/title_activity_main2"
-            android:parentActivityName=".Screens.LoginRequestScreen"
-            android:theme="@style/AppTheme.NoActionBar"
-           >
-
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+<uses-permission android:name= "android.permission.GET_ACCOUNTS"/>
+<uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+<uses-permission android:name="android.permission.VIBRATE"/>
+
+<uses-permission android:name=".permission.RECEIVE" />
+
+    android:protectionLevel="signature" />
 </manifest>
