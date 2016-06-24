@@ -12,9 +12,6 @@ import com.course.masterex.account.LoginScreen;
 import com.course.masterex.account.RegisterScreen;
 import com.course.masterex.base.BaseActivity;
 
-/**
- * Created by DELL on 5/6/2016.
- */
 public class LoginRequestScreen extends BaseActivity {
 
 
