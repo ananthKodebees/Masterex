@@ -23,6 +23,8 @@ public class Constants {
 
     public  static  final String UpdateUrL = baseURL + "updateProfile";
 
+    public static final String SaveUrL = baseURL + "savedCourseList";
+
     public static final String SHARED_PREF_NAME = "Masterex";
 
     public static final String USER_NAME = "user";

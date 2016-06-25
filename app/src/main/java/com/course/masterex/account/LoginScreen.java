@@ -68,7 +68,6 @@ SharedPreferences sharedPreferences;
             public void onClick(View v) {
 
                 final String gcmid = sharedPreferences.getString("gcmId", "");
-                Log.e("GCM",gcmid );
 
                 List<NameValuePair> loginValues = new ArrayList<NameValuePair>();
                 loginValues.add(new BasicNameValuePair("username", username.getText().toString()));

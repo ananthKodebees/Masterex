@@ -67,7 +67,9 @@
 
 <uses-permission android:name="android.permission.VIBRATE"/>
 
-<uses-permission android:name=".permission.RECEIVE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    android:protectionLevel="signature" />
+    <permission android:name="com.course.masterex.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="your.package.name.permission.C2D_MESSAGE" />
+
 </manifest>

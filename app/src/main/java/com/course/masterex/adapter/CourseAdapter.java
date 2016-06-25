@@ -125,7 +125,7 @@ String url = Constants.SavedUrL;
                Log.e("courseId", courseId);
                values.add(new BasicNameValuePair("courseid", courseId));
 
-               ServerRequest serverRequest = new ServerRequest(context,url,ServiceHandler.POST, CourseAdapter.this, RequestId.SAVE_REQUEST,values);
+               ServerRequest serverRequest = new ServerRequest(context, url, ServiceHandler.POST, CourseAdapter.this, RequestId.SAVE_REQUEST, values);
                serverRequest.execute("");
 
            }
@@ -140,9 +140,10 @@ String url = Constants.SavedUrL;
     }
 
 
-    public Activity getcontext() {
-        return context;
-    }
+
+      public Activity getcontext() {
+       return context;
+   }
 
 
 

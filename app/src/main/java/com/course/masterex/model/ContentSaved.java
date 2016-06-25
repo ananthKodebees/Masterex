@@ -8,31 +8,44 @@ import java.util.ArrayList;
 public class ContentSaved {
 
     public String name;
-    public String description;
-    public String participants;
-    public String course;
+    public String type;
+    public String id;
 
-
-    public ContentSaved(String name, String description, String participants, String course ){
+    public ContentSaved(String name, String type, String id){
 
         this.name = name;
-        this.description = description;
-        this.participants = participants;
-        this.course = course;
+        this.type = type;
+        this.id = id;
+
     }
 
-    public static ArrayList<ContentSaved> getUsers(){
-        ArrayList<ContentSaved> user = new ArrayList<ContentSaved>();
-        user.add(new ContentSaved("A Course on C", "Course Start date", "200 Participants","A course on C"));
-        user.add(new ContentSaved("A Course on IOS", "Course Start date", "200 Participants","A course on IOS"));
-        user.add(new ContentSaved("A Course on PHP", "Course Start date", "200 Participants","A course on PHP"));
-        user.add(new ContentSaved("A Course on ANDROID", "Course Start date", "200 Participants","A course on ANDROID"));
-        user.add(new ContentSaved("A Course on C++", "Course Start date", "200 Participants","A course on C++"));
-        user.add(new ContentSaved("A Course on JAVA", "Course Start date", "200 Participants", "A course on JAVA"));
-        user.add(new ContentSaved("A Course on WEB", "Course Start date", "200 Participants","A course on WEB"));
-        user.add(new ContentSaved("A Course on C#", "Course Start date", "200 Participants","A course on C#"));
-        return user;
+    public String getName() {
+        return name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+
+
 }
 
 

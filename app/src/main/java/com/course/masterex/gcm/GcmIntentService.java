@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
-
 import com.course.masterex.R;
 import com.course.masterex.account.LoginScreen;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
