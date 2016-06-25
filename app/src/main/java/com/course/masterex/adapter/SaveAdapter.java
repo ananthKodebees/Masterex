@@ -66,14 +66,19 @@ public class SaveAdapter extends BaseAdapter {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.content_saved, null, true);
 
-        TextView tvName = (TextView) rowView.findViewById(R.id.tvName);
-        TextView tvPart = (TextView) rowView.findViewById(R.id.tvPart);
-        TextView tvDate = (TextView) rowView.findViewById(R.id.tvDate);
+        TextView tvName = (TextView) rowView.findViewById(R.id.tvname);
+        TextView tvtype = (TextView) rowView.findViewById(R.id.tvdate);
         ImageView image = (ImageView) rowView.findViewById(R.id.discover_first_image);
+        ImageView delete = (ImageView) rowView.findViewById(R.id.close_image);
+delete.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        closeImage();
+    }
+});
+        tvName.setText(save.getName().toString());
+        tvtype.setText(save.getType().toString());
 
-        tvName.setText(save.getType().toString());
-        tvPart.setText(save.getName().toString());
-        tvDate.setText(save.getName().toString());
 
 
         rowView.setOnClickListener(new View.OnClickListener() {

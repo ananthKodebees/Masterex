@@ -72,17 +72,9 @@ public class DiscoverFragment extends Fragment implements ServerResponse{
                     JSONObject obj = courselist.getJSONObject(i);
 
                     String courseId = obj.getString("_id");
-                    Log.e("courseId", courseId);
-
-                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                    editor.commit();
 
                     String courseName = obj.getString("courseName");
-                    Log.e("courseName",courseName );
                     String courseType = obj.getString("courseType");
-                    Log.e("courseType",courseType );
 
                     ContentDiscover course = new ContentDiscover(courseName,courseType,courseId);
                     list.add(course);

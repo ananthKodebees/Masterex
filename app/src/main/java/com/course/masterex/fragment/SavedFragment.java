@@ -24,18 +24,22 @@ import com.course.masterex.service.ServiceHandler;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class SavedFragment  extends Fragment  implements ServerResponse{
+public class SavedFragment  extends Fragment  implements ServerResponse {
 
     View view;
     public static String url = Constants.SaveUrL;
     ArrayList<ContentSaved> list = new ArrayList<>();
     private ListAdapter adapter;
     ListView listview;
+    JSONArray savedlist = null;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.saved_list, container, false);
@@ -48,7 +52,7 @@ public class SavedFragment  extends Fragment  implements ServerResponse{
 
         List<NameValuePair> value = new ArrayList<NameValuePair>();
         value.add(new BasicNameValuePair("_id", id));
-        ServerRequest serverRequest = new ServerRequest(getActivity(),url, ServiceHandler.POST,SavedFragment.this, null,value);
+        ServerRequest serverRequest = new ServerRequest(getActivity(), url, ServiceHandler.POST, SavedFragment.this, null, value);
         serverRequest.execute("");
         return view;
     }
@@ -56,6 +60,35 @@ public class SavedFragment  extends Fragment  implements ServerResponse{
 
     @Override
     public void onResponse(RequestId requestId, String response) {
+        if (response != null) {
+            try {
 
+                JSONObject jsonObj = new JSONObject(response);
+                savedlist = jsonObj.getJSONArray("courselist");
+
+                for (int i = 0; i < savedlist.length(); i++) {
+                    JSONObject obj = savedlist.getJSONObject(i);
+
+                    JSONArray saved = obj.getJSONArray("courseList");
+                for (int j = 0; j <saved.length();j++){
+                        JSONObject object = saved.getJSONObject(j);
+
+                        String courseName = object.getString("courseName");
+                        Log.e("saved", courseName);
+                        String courseType = object.getString("courseType");
+                        ContentSaved save = new ContentSaved(courseName, courseType, courseName);
+                        list.add(save);
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+
+            Log.e("ServiceHandler", "coudnt get data");
+        }
+        adapter = new SaveAdapter(list,getActivity());
+        listview.setAdapter(adapter);
     }
 }
